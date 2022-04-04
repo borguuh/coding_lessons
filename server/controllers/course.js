@@ -30,7 +30,7 @@ export const uploadImage = async (req, res) => {
 
     // image params
     const params = {
-      Bucket: "CodingLessons-bucket",
+      Bucket: "edemy-bucket",
       Key: `${nanoid()}.${type}`,
       Body: base64Data,
       ACL: "public-read",
@@ -121,7 +121,7 @@ export const uploadVideo = async (req, res) => {
 
     // video params
     const params = {
-      Bucket: "CodingLessons-bucket",
+      Bucket: "edemy-bucket",
       Key: `${nanoid()}.${video.type.split("/")[1]}`,
       Body: readFileSync(video.path),
       ACL: "public-read",
@@ -229,4 +229,84 @@ export const removeLesson = async (req, res) => {
   }).exec();
 
   res.json({ ok: true });
+};
+
+export const updateLesson = async (req, res) => {
+  try {
+    // console.log("UPDATE LESSON", req.body);
+    const { slug } = req.params;
+    const { _id, title, content, video, free_preview } = req.body;
+    const course = await Course.findOne({ slug }).select("instructor").exec();
+
+    if (course.instructor._id != req.user._id) {
+      return res.status(400).send("Unauthorized");
+    }
+
+    const updated = await Course.updateOne(
+      { "lessons._id": _id },
+      {
+        $set: {
+          "lessons.$.title": title,
+          "lessons.$.content": content,
+          "lessons.$.video": video,
+          "lessons.$.free_preview": free_preview,
+        },
+      },
+      { new: true }
+    ).exec();
+    // console.log("updated", updated);
+    res.json({ ok: true });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Update lesson failed");
+  }
+};
+
+export const publishCourse = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const course = await Course.findById(courseId).select("instructor").exec();
+
+    if (course.instructor._id != req.user._id) {
+      return res.status(400).send("Unauthorized");
+    }
+
+    const updated = await Course.findByIdAndUpdate(
+      courseId,
+      { published: true },
+      { new: true }
+    ).exec();
+    res.json(updated);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Publish course failed");
+  }
+};
+
+export const unpublishCourse = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const course = await Course.findById(courseId).select("instructor").exec();
+
+    if (course.instructor._id != req.user._id) {
+      return res.status(400).send("Unauthorized");
+    }
+
+    const updated = await Course.findByIdAndUpdate(
+      courseId,
+      { published: false },
+      { new: true }
+    ).exec();
+    res.json(updated);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Unpublish course failed");
+  }
+};
+
+export const courses = async (req, res) => {
+  const all = await Course.find({ published: true })
+    .populate("instructor", "_id name")
+    .exec();
+  res.json(all);
 };

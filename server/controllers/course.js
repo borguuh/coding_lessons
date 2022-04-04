@@ -33,7 +33,7 @@ export const uploadImage = async (req, res) => {
 
     // image params
     const params = {
-      Bucket: "CodingLessons-bucket",
+      Bucket: "edemy-bucket",
       Key: `${nanoid()}.${type}`,
       Body: base64Data,
       ACL: "public-read",
@@ -124,7 +124,7 @@ export const uploadVideo = async (req, res) => {
 
     // video params
     const params = {
-      Bucket: "CodingLessons-bucket",
+      Bucket: "edemy-bucket",
       Key: `${nanoid()}.${video.type.split("/")[1]}`,
       Body: readFileSync(video.path),
       ACL: "public-read",
@@ -462,5 +462,17 @@ export const markCompleted = async (req, res) => {
       lessons: lessonId,
     }).save();
     res.json({ ok: true });
+  }
+};
+
+export const listCompleted = async (req, res) => {
+  try {
+    const list = await Completed.findOne({
+      user: req.user._id,
+      course: req.body.courseId,
+    }).exec();
+    list && res.json(list.lessons);
+  } catch (err) {
+    console.log(err);
   }
 };

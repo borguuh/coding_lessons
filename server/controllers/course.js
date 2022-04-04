@@ -29,7 +29,7 @@ export const uploadImage = async (req, res) => {
 
     // image params
     const params = {
-      Bucket: "CodingLessons-bucket",
+      Bucket: "Borguuh-bucket",
       Key: `${nanoid()}.${type}`,
       Body: base64Data,
       ACL: "public-read",

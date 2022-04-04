@@ -29,7 +29,7 @@ export const uploadImage = async (req, res) => {
 
     // image params
     const params = {
-      Bucket: "Borguuh-bucket",
+      Bucket: "CodingLessons-bucket",
       Key: `${nanoid()}.${type}`,
       Body: base64Data,
       ACL: "public-read",
@@ -92,5 +92,16 @@ export const create = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(400).send("Course create failed. Try again.");
+  }
+};
+
+export const read = async (req, res) => {
+  try {
+    const course = await Course.findOne({ slug: req.params.slug })
+      .populate("instructor", "_id name")
+      .exec();
+    res.json(course);
+  } catch (err) {
+    console.log(err);
   }
 };

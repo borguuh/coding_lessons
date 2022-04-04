@@ -36,8 +36,10 @@ const UserRoute = ({ children, showNav = true }) => {
       ) : (
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-2">{showNav && <UserNav />}</div>
-            <div className="col-md-10">{children}</div>
+            {
+              //<div className="col-md-2">{showNav && <UserNav />}</div>
+              <div className="col-md-12 mx-auto auto-center">{children}</div>
+            }
           </div>
         </div>
       )}

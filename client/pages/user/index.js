@@ -38,7 +38,9 @@ const UserIndex = () => {
           className="d-flex justify-content-center display-1 text-danger p-5"
         />
       )}
-      <h1 className="jumbotron text-center square">User dashboard</h1>
+      <h1 className="jumbotron text-center bg-primary square">
+        User dashboard
+      </h1>
 
       {/* show list of courses */}
 

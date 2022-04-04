@@ -82,7 +82,7 @@ const SingleCourse = () => {
   return (
     <StudentRoute>
       <div className="row">
-        <div style={{ maWidth: 320 }}>
+        <div style={{ maWidth: 380 }}>
           <Button
             onClick={() => setCollapsed(!collapsed)}
             className="text-primary mt-1 btn-block mb-2"
@@ -99,7 +99,7 @@ const SingleCourse = () => {
               <Item
                 onClick={() => setClicked(index)}
                 key={index}
-                icon={<Avatar>{index + 1}</Avatar>}
+                icon={<PlayCircleOutlined className="text-primary " />}
               >
                 {lesson.title.substring(0, 30)}{" "}
                 {completedLessons.includes(lesson._id) ? (
@@ -140,12 +140,12 @@ const SingleCourse = () => {
               {course.lessons[clicked].video &&
                 course.lessons[clicked].video.Location && (
                   <>
-                    <div className="wrapper">
+                    <div className="wrapper mx-auto">
                       <ReactPlayer
-                        className="player"
+                        className="player mx-auto"
                         url={course.lessons[clicked].video.Location}
-                        width="100%"
-                        height="100%"
+                        width="70%"
+                        height="70%"
                         controls
                         onEnded={() => markCompleted()}
                       />
@@ -162,7 +162,7 @@ const SingleCourse = () => {
             <div className="d-flex justify-content-center p-5">
               <div className="text-center p-5">
                 <PlayCircleOutlined className="text-primary display-1 p-5" />
-                <p className="lead">Clcik on the lessons to start learning</p>
+                <p className="lead">Click on the lessons to start learning</p>
               </div>
             </div>
           )}

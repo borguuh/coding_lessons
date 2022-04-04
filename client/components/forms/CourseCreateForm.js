@@ -20,7 +20,7 @@ const CourseCreateForm = ({
   return (
     <>
       {values && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="col-md-8 auto-center mx-auto">
           <div className="form-group">
             <input
               type="text"
@@ -62,7 +62,7 @@ const CourseCreateForm = ({
               <div className="form-group">
                 <Select
                   defaultValue="$9.99"
-                  style={{ widht: "100%" }}
+                  style={{ width: "100%" }}
                   onChange={(v) => setValues({ ...values, price: v })}
                   tokenSeparators={[,]}
                   size="large"
@@ -116,7 +116,7 @@ const CourseCreateForm = ({
               <Button
                 onClick={handleSubmit}
                 disabled={values.loading || values.uploading}
-                className="btn btn-primary"
+                className="btn btn-secondary"
                 loading={values.loading}
                 type="primary"
                 size="large"

@@ -33,7 +33,8 @@ const SingleCourseJumbotron = ({
   return (
     <div className="jumbotron bg-primary square">
       <div className="row">
-        <div className="col-md-8">
+        <div className="col-md-1"></div>
+        <div className="col-md-7">
           {/* title */}
           <h1 className="text-light font-weight-bold">{name}</h1>
           {/* description */}
@@ -60,7 +61,7 @@ const SingleCourseJumbotron = ({
               : "Free"}
           </h4>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-3">
           {/* {JSON.stringify(lessons[0])} */}
           {/* show video preview or course image */}
           {lessons[0].video && lessons[0].video.Location ? (
@@ -107,6 +108,7 @@ const SingleCourseJumbotron = ({
             </Button>
           )}
         </div>
+        <div className="col-md-1"></div>
       </div>
     </div>
   );

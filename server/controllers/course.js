@@ -32,7 +32,7 @@ export const uploadImage = async (req, res) => {
 
     // image params
     const params = {
-      Bucket: "CodingLessons-bucket",
+      Bucket: "bucket4lms",
       Key: `${nanoid()}.${type}`,
       Body: base64Data,
       ACL: "public-read",
@@ -123,7 +123,7 @@ export const uploadVideo = async (req, res) => {
 
     // video params
     const params = {
-      Bucket: "CodingLessons-bucket",
+      Bucket: "bucket4lms",
       Key: `${nanoid()}.${video.type.split("/")[1]}`,
       Body: readFileSync(video.path),
       ACL: "public-read",

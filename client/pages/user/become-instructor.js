@@ -3,6 +3,7 @@ import { Context } from "../../context";
 import { Button } from "antd";
 import axios from "axios";
 import {
+  DollarOutlined,
   SettingOutlined,
   UserSwitchOutlined,
   LoadingOutlined,
@@ -35,18 +36,29 @@ const BecomeInstructor = () => {
 
   return (
     <>
-      <h1 className="jumbotron text-center square">Become Instructor</h1>
+      <h1 className="jumbotron bg-primary text-center square">
+        Become an Instructor
+      </h1>
 
       <div className="container">
         <div className="row">
           <div className="col-md-6 offset-md-3 text-center">
-            <div className="pt-4">
-              <UserSwitchOutlined className="display-1 pb-3" />
+            <div className="pt-1">
+              <DollarOutlined className="display-3 pb-3" />
               <br />
               <h2>Setup payout to publish courses on CodingLessons</h2>
+              <p className="lead">
+                On CodingLessons, you can become an instructor by publishing
+                courses that help students to gain new skills online to advance
+                their careers and get paid.
+              </p>
+              <p className="lead ">
+                For easy cash out of your earnings, CodingLessons uses Stripe to
+                transfer earnings to your bank account
+              </p>
               <p className="lead text-warning">
-                CodingLessons partners with stripe to transfer earnings to your bank
-                account
+                Clicking the button below will redirect you to stripe to start
+                your onboarding process.
               </p>
 
               <Button
@@ -64,10 +76,6 @@ const BecomeInstructor = () => {
               >
                 {loading ? "Processing..." : "Payout Setup"}
               </Button>
-
-              <p className="lead">
-                You will be redirected to stripe to complete onboarding process.
-              </p>
             </div>
           </div>
         </div>

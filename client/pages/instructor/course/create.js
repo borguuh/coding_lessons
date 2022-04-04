@@ -85,7 +85,7 @@ const CourseCreate = () => {
 
   return (
     <InstructorRoute>
-      <h1 className="jumbotron text-center square">Create Course</h1>
+      <h1 className="jumbotron text-center bg-primary square">Create Course</h1>
       <div className="pt-3 pb-3">
         <CourseCreateForm
           handleSubmit={handleSubmit}

@@ -8,7 +8,6 @@ const morgan = require("morgan");
 require("dotenv").config();
 
 const csrfProtection = csrf({ cookie: true });
-
 // create express app
 const app = express();
 

@@ -3,10 +3,25 @@
 }
 
 .jumbotron {
-  background-image: linear-gradient(to right, #007bff, #000);
+  /* background-image: linear-gradient(to right, #007bff, #000); */
+  /*background-image: linear-gradient(to right, #ff0000, #ff9900);*/
+  background-image: linear-gradient(to right bottom, #011e4aaf, #011e4abd),
+    url(../img/showcase.jpg);
   color: #fff;
 }
 
 .pointer {
   cursor: pointer;
+}
+
+.wrapper {
+  display: block;
+}
+
+.player {
+  display: block;
+}
+
+.auto-center {
+  display: block;
 }

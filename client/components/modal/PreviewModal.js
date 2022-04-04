@@ -1,15 +1,14 @@
 import { Modal } from "antd";
 import ReactPlayer from "react-player";
 
-// id, amount_total, customer, currency
 const PreviewModal = ({ showModal, setShowModal, preview }) => {
   return (
     <>
       <Modal
-        // title="Preview"
+        title="Course Preview"
         visible={showModal}
         onCancel={() => setShowModal(!showModal)}
-        width={720}
+        widht={720}
         footer={null}
       >
         <div className="wrapper">

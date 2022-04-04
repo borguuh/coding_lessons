@@ -65,7 +65,17 @@ const CourseCreate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
+    try {
+      // console.log(values);
+      const { data } = await axios.post("/api/course", {
+        ...values,
+        image,
+      });
+      toast("Great! Now you can start adding lessons");
+      rotuer.push("/instructor");
+    } catch (err) {
+      toast(err.response.data);
+    }
   };
 
   return (

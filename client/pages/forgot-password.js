@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 const ForgotPassword = () => {
   // state
   const [email, setEmail] = useState("");
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState(false);
   const [code, setCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -40,6 +40,27 @@ const ForgotPassword = () => {
     }
   };
 
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    // console.log(email, code, newPassword);
+    // return;
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/reset-password", {
+        email,
+        code,
+        newPassword,
+      });
+      setEmail("");
+      setCode("");
+      setNewPassword("");
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      toast(err.response.data);
+    }
+  };
+
   return (
     <>
       <h1 className="jumbotron text-center bg-primary square">
@@ -47,7 +68,7 @@ const ForgotPassword = () => {
       </h1>
 
       <div className="container col-md-4 offset-md-4 pb-5">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={success ? handleResetPassword : handleSubmit}>
           <input
             type="email"
             className="form-control mb-4 p-4"
@@ -56,7 +77,28 @@ const ForgotPassword = () => {
             placeholder="Enter email"
             required
           />
-          <br />
+          {success && (
+            <>
+              <input
+                type="text"
+                className="form-control mb-4 p-4"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="Enter secret code"
+                required
+              />
+
+              <input
+                type="password"
+                className="form-control mb-4 p-4"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="New Password"
+                required
+              />
+            </>
+          )}
+
           <button
             type="submit"
             className="btn btn-primary btn-block p-2"

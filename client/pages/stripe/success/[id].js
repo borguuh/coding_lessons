@@ -13,23 +13,20 @@ const StripeSuccess = () => {
     if (id) successRequest();
   }, [id]);
 
+  console.log(id);
+
   const successRequest = async () => {
-    try {
-      const { data } = await axios.get(`/api/stripe-success/${id}`);
-      // console.log("STRIPE SUCCESS FROM BACKEND => ", data);
-      router.push(`/user/course/${data.course.slug}`);
-    } catch (err) {
-      router.push(`/user`);
-    }
+    const { data } = await axios.get(`/api/stripe-success/${id}`);
+    // console.log("SUCCESS REQ DATA", data);
+    router.push(`/user/course/${data.course.slug}`);
   };
 
   return (
     <UserRoute showNav={false}>
-      {/* <h1 className="jumbotron text-center square">User Dashboard</h1> */}
       <div className="row text-center">
         <div className="col-md-9 pb-5">
           <div className="d-flex justify-content-center p-5">
-            <SyncOutlined spin className="display-1 text-danger p-5 h4" />
+            <SyncOutlined spin className="display-1 text-danger p-5" />
           </div>
         </div>
         <div className="col-md-3"></div>

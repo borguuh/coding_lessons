@@ -85,7 +85,7 @@ const SingleCourseJumbotron = ({
           )}
           {/* enroll button */}
           {loading ? (
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center mt-3">
               <LoadingOutlined className="h1 text-danger" />
             </div>
           ) : (

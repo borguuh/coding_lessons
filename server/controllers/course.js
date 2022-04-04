@@ -4,7 +4,7 @@ import Course from "../models/course";
 import sllugify from "slugify";
 import slugify from "slugify";
 import { readFileSync } from "fs";
-import user from "../models/user";
+import User from "../models/user";
 
 const awsConfig = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -315,10 +315,11 @@ export const courses = async (req, res) => {
 export const checkEnrollment = async (req, res) => {
   const { courseId } = req.params;
   // find courses of the currently logged in user
-  const user = await user.findById(req.user._id).exec();
+  const user = await User.findById(req.user._id).exec();
   // check if course id is found in user courses array
   let ids = [];
-  for (let i = 0; i < user.courses.length; i++) {
+  let length = user.courses && user.courses.length;
+  for (let i = 0; i < length; i++) {
     ids.push(user.courses[i].toString());
   }
   res.json({

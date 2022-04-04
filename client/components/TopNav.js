@@ -74,22 +74,24 @@ const TopNav = () => {
       {user === null && (
         <>
           <Item
-            key="/login"
-            onClick={(e) => setCurrent(e.key)}
-            icon={<LoginOutlined />}
-          >
-            <Link href="/login">
-              <a>Login</a>
-            </Link>
-          </Item>
-
-          <Item
+            className="float-right"
             key="/register"
             onClick={(e) => setCurrent(e.key)}
             icon={<UserAddOutlined />}
           >
             <Link href="/register">
               <a>Register</a>
+            </Link>
+          </Item>
+
+          <Item
+            className="float-right"
+            key="/login"
+            onClick={(e) => setCurrent(e.key)}
+            icon={<LoginOutlined />}
+          >
+            <Link href="/login">
+              <a>Login</a>
             </Link>
           </Item>
         </>

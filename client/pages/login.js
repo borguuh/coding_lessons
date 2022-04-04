@@ -7,7 +7,7 @@ import { Context } from "../context";
 import { useRouter } from "next/router";
 
 const Login = () => {
-  const [email, setEmail] = useState("Borguuh@gmail.com");
+  const [email, setEmail] = useState("Borguuhstripeseller@gmail.com");
   const [password, setPassword] = useState("rrrrrr");
   const [loading, setLoading] = useState(false);
 

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const { ObjectId } = mongoose.Schema;
 
 const completedSchema = new mongoose.Schema(
@@ -16,5 +16,4 @@ const completedSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// module.exports = mongoose.model("Category", categorySchema);
 export default mongoose.model("Completed", completedSchema);

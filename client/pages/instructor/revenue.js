@@ -18,14 +18,14 @@ const InstructorRevenue = () => {
   }, []);
 
   const sendBalanceRequest = async () => {
-    const { data } = await axios.get("process.env.NEXT_PUBLIC_API/instructor/balance");
+    const { data } = await axios.get("${process.env.NEXT_PUBLIC_API}/instructor/balance");
     setBalance(data);
   };
 
   const handlePayoutSettings = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get("process.env.NEXT_PUBLIC_API/instructor/payout-settings");
+      const { data } = await axios.get("${process.env.NEXT_PUBLIC_API}/instructor/payout-settings");
       window.location.href = data;
     } catch (err) {
       setLoading(false);

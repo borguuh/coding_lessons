@@ -7,7 +7,7 @@ const Index = ({ courses }) => {
 
   // useEffect(() => {
   //   const fetchCourses = async () => {
-  //     const { data } = await axios.get("process.env.NEXT_PUBLIC_API/courses");
+  //     const { data } = await axios.get("${process.env.NEXT_PUBLIC_API}/courses");
   //     setCourses(data);
   //   };
   //   fetchCourses();

@@ -24,7 +24,7 @@ const SingleCourse = ({ course }) => {
   }, [user, course]);
 
   const checkEnrollment = async () => {
-    const { data } = await axios.get(`process.env.NEXT_PUBLIC_API/check-enrollment/${course._id}`);
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/check-enrollment/${course._id}`);
     console.log("CHECK ENROLLMENT", data);
     setEnrolled(data);
   };
@@ -41,7 +41,7 @@ const SingleCourse = ({ course }) => {
       // check if already enrolled
       if (enrolled.status)
         return router.push(`/user/course/${enrolled.course.slug}`);
-      const { data } = await axios.post(`process.env.NEXT_PUBLIC_API/paid-enrollment/${course._id}`);
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/paid-enrollment/${course._id}`);
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
       stripe.redirectToCheckout({ sessionId: data });
     } catch (err) {
@@ -61,7 +61,7 @@ const SingleCourse = ({ course }) => {
       if (enrolled.status)
         return router.push(`/user/course/${enrolled.course.slug}`);
       setLoading(true);
-      const { data } = await axios.post(`process.env.NEXT_PUBLIC_API/free-enrollment/${course._id}`);
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/free-enrollment/${course._id}`);
       toast(data.message);
       setLoading(false);
       router.push(`/user/course/${data.course.slug}`);

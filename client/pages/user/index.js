@@ -5,7 +5,6 @@ import axios from "axios";
 import { Avatar } from "antd";
 import Link from "next/link";
 import { SyncOutlined, PlayCircleOutlined } from "@ant-design/icons";
-import course from "../../../server/models/course";
 
 const UserIndex = () => {
   const {

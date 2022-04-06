@@ -43,12 +43,12 @@ const CourseView = () => {
   }, [course]);
 
   const loadCourse = async () => {
-    const { data } = await axios.get(`/api/course/${slug}`);
+    const { data } = await axios.get(`process.env.NEXT_PUBLIC_API/course/${slug}`);
     setCourse(data);
   };
 
   const studentCount = async () => {
-    const { data } = await axios.post(`/api/instructor/student-count`, {
+    const { data } = await axios.post(`process.env.NEXT_PUBLIC_API/instructor/student-count`, {
       courseId: course._id,
     });
     console.log("STUDENT COUNT => ", data);
@@ -61,7 +61,7 @@ const CourseView = () => {
     // console.log(values);
     try {
       const { data } = await axios.post(
-        `/api/course/lesson/${slug}/${course.instructor._id}`,
+        `process.env.NEXT_PUBLIC_API/course/lesson/${slug}/${course.instructor._id}`,
         values
       );
       // console.log(data)
@@ -87,7 +87,7 @@ const CourseView = () => {
       videoData.append("video", file);
       // save progress bar and send video as form data to backend
       const { data } = await axios.post(
-        `/api/course/video-upload/${course.instructor._id}`,
+        `process.env.NEXT_PUBLIC_API/course/video-upload/${course.instructor._id}`,
         videoData,
         {
           onUploadProgress: (e) => {
@@ -110,7 +110,7 @@ const CourseView = () => {
     try {
       setUploading(true);
       const { data } = await axios.post(
-        `/api/course/video-remove/${course.instructor._id}`,
+        `process.env.NEXT_PUBLIC_API/course/video-remove/${course.instructor._id}`,
         values.video
       );
       console.log(data);
@@ -130,7 +130,7 @@ const CourseView = () => {
         "Once you publsih your course, it will be live in the marketplace for users to enroll"
       );
       if (!answer) return;
-      const { data } = await axios.put(`/api/course/publish/${courseId}`);
+      const { data } = await axios.put(`process.env.NEXT_PUBLIC_API/course/publish/${courseId}`);
       setCourse(data);
       toast("Congrats! Your course is live");
     } catch (err) {
@@ -144,7 +144,7 @@ const CourseView = () => {
         "Once you unpublsih your course, it will no be available for users to enroll"
       );
       if (!answer) return;
-      const { data } = await axios.put(`/api/course/unpublish/${courseId}`);
+      const { data } = await axios.put(`process.env.NEXT_PUBLIC_API/course/unpublish/${courseId}`);
       setCourse(data);
       toast("Your course is unpublished");
     } catch (err) {

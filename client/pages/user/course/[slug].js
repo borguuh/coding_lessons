@@ -36,34 +36,47 @@ const SingleCourse = () => {
     if (course) loadCompletedLessons();
   }, [course]);
 
+  axios.defaults.withCredentials = true;
+
   const loadCourse = async () => {
-    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/user/course/${slug}`);
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_API}/user/course/${slug}`
+    );
     setCourse(data);
   };
 
   const loadCompletedLessons = async () => {
-    const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/list-completed`, {
-      courseId: course._id,
-    });
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_API}/list-completed`,
+      {
+        courseId: course._id,
+      }
+    );
     console.log("COMPLETED LESSONS => ", data);
     setCompletedLessons(data);
   };
 
   const markCompleted = async () => {
-    const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/mark-completed`, {
-      courseId: course._id,
-      lessonId: course.lessons[clicked]._id,
-    });
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_API}/mark-completed`,
+      {
+        courseId: course._id,
+        lessonId: course.lessons[clicked]._id,
+      }
+    );
     console.log(data);
     setCompletedLessons([...completedLessons, course.lessons[clicked]._id]);
   };
 
   const markIncompleted = async () => {
     try {
-      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/mark-incomplete`, {
-        courseId: course._id,
-        lessonId: course.lessons[clicked]._id,
-      });
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/mark-incomplete`,
+        {
+          courseId: course._id,
+          lessonId: course.lessons[clicked]._id,
+        }
+      );
       console.log(data);
       const all = completedLessons;
       console.log("ALL => ", all);

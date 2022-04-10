@@ -12,10 +12,13 @@ const StudentRoute = ({ children, showNav = true }) => {
   useEffect(() => {
     fetchUser();
   }, []);
+  axios.defaults.withCredentials = true;
 
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/current-user`);
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API}/current-user`
+      );
       //   console.log(data);
       if (data.ok) setOk(true);
     } catch (err) {

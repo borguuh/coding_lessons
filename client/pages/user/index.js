@@ -16,11 +16,14 @@ const UserIndex = () => {
   useEffect(() => {
     loadCourses();
   }, []);
+  axios.defaults.withCredentials = true;
 
   const loadCourses = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/user-courses`);
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API}/user-courses`
+      );
       setCourses(data);
       setLoading(false);
     } catch (err) {

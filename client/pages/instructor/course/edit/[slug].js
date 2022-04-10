@@ -30,9 +30,8 @@ const CourseEdit = () => {
   // state for lessons update
   const [visible, setVisible] = useState(false);
   const [current, setCurrent] = useState({});
-  const [uploadVideoButtonText, setUploadVideoButtonText] = useState(
-    "Upload Video"
-  );
+  const [uploadVideoButtonText, setUploadVideoButtonText] =
+    useState("Upload Video");
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
 
@@ -45,7 +44,9 @@ const CourseEdit = () => {
   }, [slug]);
 
   const loadCourse = async () => {
-    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/course/${slug}`);
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_API}/course/${slug}`
+    );
     console.log(data);
     if (data) setValues(data);
     if (data && data.image) setImage(data.image);
@@ -63,9 +64,12 @@ const CourseEdit = () => {
     // resize
     Resizer.imageFileResizer(file, 720, 500, "JPEG", 100, 0, async (uri) => {
       try {
-        let { data } = await axios.post("${process.env.NEXT_PUBLIC_API}/course/upload-image", {
-          image: uri,
-        });
+        let { data } = await axios.post(
+          `${process.env.NEXT_PUBLIC_API}/course/upload-image`,
+          {
+            image: uri,
+          }
+        );
         console.log("IMAGE UPLOADED", data);
         // set image in the state
         setImage(data);
@@ -82,7 +86,10 @@ const CourseEdit = () => {
     try {
       // console.log(values);
       setValues({ ...values, loading: true });
-      const res = await axios.post("${process.env.NEXT_PUBLIC_API}/course/remove-image", { image });
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/course/remove-image`,
+        { image }
+      );
       setImage({});
       setPreview("");
       setUploadButtonText("Upload Image");
@@ -98,10 +105,13 @@ const CourseEdit = () => {
     e.preventDefault();
     try {
       // console.log(values);
-      const { data } = await axios.put(`${process.env.NEXT_PUBLIC_API}/course/${slug}`, {
-        ...values,
-        image,
-      });
+      const { data } = await axios.put(
+        `${process.env.NEXT_PUBLIC_API}/course/${slug}`,
+        {
+          ...values,
+          image,
+        }
+      );
       toast("Course updated!");
       // router.push("/instructor");
     } catch (err) {
@@ -127,10 +137,13 @@ const CourseEdit = () => {
 
     setValues({ ...values, lessons: [...allLessons] });
     // save the new lessons order in db
-    const { data } = await axios.put(`${process.env.NEXT_PUBLIC_API}/course/${slug}`, {
-      ...values,
-      image,
-    });
+    const { data } = await axios.put(
+      `${process.env.NEXT_PUBLIC_API}/course/${slug}`,
+      {
+        ...values,
+        image,
+      }
+    );
     // console.log("LESSONS REARRANGED RES => ", data);
     toast("Lessons rearranged successfully");
   };
@@ -143,7 +156,9 @@ const CourseEdit = () => {
     // console.log("removed", removed[0]._id);
     setValues({ ...values, lessons: allLessons });
     // send request to server
-    const { data } = await axios.put(`${process.env.NEXT_PUBLIC_API}/course/${slug}/${removed[0]._id}`);
+    const { data } = await axios.put(
+      `${process.env.NEXT_PUBLIC_API}/course/${slug}/${removed[0]._id}`
+    );
     console.log("LESSON DELETED =>", data);
   };
 

@@ -11,15 +11,19 @@ const StripeCallback = () => {
 
   useEffect(() => {
     if (user) {
-      axios.post(`${process.env.NEXT_PUBLIC_API}/get-account-status`).then((res) => {
-        // console.log(res);
-        dispatch({
-          type: "LOGIN",
-          payload: res.data,
+      axios
+        .post(`${process.env.NEXT_PUBLIC_API}/get-account-status`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          // console.log(res);
+          dispatch({
+            type: "LOGIN",
+            payload: res.data,
+          });
+          window.localStorage.setItem("user", JSON.stringify(res.data));
+          window.location.href = "/instructor";
         });
-        window.localStorage.setItem("user", JSON.stringify(res.data));
-        window.location.href = "/instructor";
-      });
     }
   }, [user]);
 

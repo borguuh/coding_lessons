@@ -110,7 +110,8 @@ const CourseEdit = () => {
         {
           ...values,
           image,
-        }
+        },
+        { withCredentials: true }
       );
       toast("Course updated!");
       // router.push("/instructor");
@@ -142,7 +143,8 @@ const CourseEdit = () => {
       {
         ...values,
         image,
-      }
+      },
+      { withCredentials: true }
     );
     // console.log("LESSONS REARRANGED RES => ", data);
     toast("Lessons rearranged successfully");
@@ -157,7 +159,8 @@ const CourseEdit = () => {
     setValues({ ...values, lessons: allLessons });
     // send request to server
     const { data } = await axios.put(
-      `${process.env.NEXT_PUBLIC_API}/course/${slug}/${removed[0]._id}`
+      `${process.env.NEXT_PUBLIC_API}/course/${slug}/${removed[0]._id}`,
+      { withCredentials: true }
     );
     console.log("LESSON DELETED =>", data);
   };
@@ -171,7 +174,8 @@ const CourseEdit = () => {
     if (current.video && current.video.Location) {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API}/course/video-remove/${values.instructor._id}`,
-        current.video
+        current.video,
+        { withCredentials: true }
       );
       console.log("REMOVED ===>", res);
     }
@@ -187,6 +191,7 @@ const CourseEdit = () => {
     const { data } = await axios.post(
       `${process.env.NEXT_PUBLIC_API}/course/video-upload/${values.instructor._id}`,
       videoData,
+      { withCredentials: true },
       {
         onUploadProgress: (e) =>
           setProgress(Math.round((100 * e.loaded) / e.total)),
@@ -202,7 +207,8 @@ const CourseEdit = () => {
     e.preventDefault();
     const { data } = await axios.put(
       `${process.env.NEXT_PUBLIC_API}/course/lesson/${slug}/${current._id}`,
-      current
+      current,
+      { withCredentials: true }
     );
     setUploadVideoButtonText("Upload Video");
     setVisible(false);

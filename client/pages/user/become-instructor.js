@@ -22,7 +22,9 @@ const BecomeInstructor = () => {
     // console.log("become instructor");
     setLoading(true);
     axios
-      .post(`${process.env.NEXT_PUBLIC_API}/make-instructor`)
+      .post(`${process.env.NEXT_PUBLIC_API}/make-instructor`, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log(res);
         window.location.href = res.data;

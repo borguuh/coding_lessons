@@ -40,7 +40,8 @@ const SingleCourse = () => {
 
   const loadCourse = async () => {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_API}/user/course/${slug}`
+      `${process.env.NEXT_PUBLIC_API}/user/course/${slug}`,
+      { withCredentials: true }
     );
     setCourse(data);
   };
@@ -50,7 +51,8 @@ const SingleCourse = () => {
       `${process.env.NEXT_PUBLIC_API}/list-completed`,
       {
         courseId: course._id,
-      }
+      },
+      { withCredentials: true }
     );
     console.log("COMPLETED LESSONS => ", data);
     setCompletedLessons(data);
@@ -62,7 +64,8 @@ const SingleCourse = () => {
       {
         courseId: course._id,
         lessonId: course.lessons[clicked]._id,
-      }
+      },
+      { withCredentials: true }
     );
     console.log(data);
     setCompletedLessons([...completedLessons, course.lessons[clicked]._id]);
@@ -75,7 +78,8 @@ const SingleCourse = () => {
         {
           courseId: course._id,
           lessonId: course.lessons[clicked]._id,
-        }
+        },
+        { withCredentials: true }
       );
       console.log(data);
       const all = completedLessons;

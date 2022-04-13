@@ -40,7 +40,8 @@ const CourseCreate = () => {
           `${process.env.NEXT_PUBLIC_API}/course/upload-image`,
           {
             image: uri,
-          }
+          },
+          { withCredentials: true }
         );
         console.log("IMAGE UPLOADED", data);
         // set image in the state
@@ -60,7 +61,8 @@ const CourseCreate = () => {
       setValues({ ...values, loading: true });
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API}/course/remove-image`,
-        { image }
+        { image },
+        { withCredentials: true }
       );
       setImage({});
       setPreview("");
@@ -82,7 +84,8 @@ const CourseCreate = () => {
         {
           ...values,
           image,
-        }
+        },
+        { withCredentials: true }
       );
       toast("Great! Now you can start adding lessons");
       router.push("/instructor");

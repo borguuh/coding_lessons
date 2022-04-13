@@ -23,7 +23,13 @@ const UserIndex = () => {
       setLoading(true);
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_API}/user-courses`,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       setCourses(data);
       setLoading(false);

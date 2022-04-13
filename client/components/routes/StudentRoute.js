@@ -18,7 +18,13 @@ const StudentRoute = ({ children, showNav = true }) => {
     try {
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_API}/current-user`,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       //   console.log(data);
       if (data.ok) setOk(true);

@@ -14,6 +14,10 @@ const StripeCallback = () => {
       axios
         .post(`${process.env.NEXT_PUBLIC_API}/get-account-status`, {
           withCredentials: true,
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
         .then((res) => {
           // console.log(res);

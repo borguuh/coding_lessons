@@ -21,7 +21,6 @@ const UserRoute = ({ children, showNav = true }) => {
         `${process.env.NEXT_PUBLIC_API}/current-user`,
         {
           withCredentials: true,
-          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },

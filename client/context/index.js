@@ -35,6 +35,7 @@ const Provider = ({ children }) => {
       payload: JSON.parse(window.localStorage.getItem("user")),
     });
   }, []);
+  axios.defaults.withCredentials = true;
 
   // axios.interceptors.response.use(
   //   function (response) {
